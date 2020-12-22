@@ -51,6 +51,9 @@ void TLC5955::init(uint8_t gslat, uint8_t spi_mosi, uint8_t spi_clk, uint8_t gsc
   pinMode(_gsclk, OUTPUT);
   setGsclkFreq(gsclk_frequency);
 
+  // Define baud rate
+  SPISettings mSettings(spi_baud_rate, MSBFIRST, SPI_MODE0);
+
   // Set default color channel indicies
   setRgbPinOrder(rgb_order_default[0], rgb_order_default[1], rgb_order_default[2]);
 }
