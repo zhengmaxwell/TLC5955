@@ -60,6 +60,9 @@ void TLC5955::setSpiBaudRate(uint32_t new_baud_rate)
 {
   // Store old baud rate
   spi_baud_rate = new_baud_rate;
+
+  // Define baud rate
+  SPISettings mSettings(spi_baud_rate, MSBFIRST, SPI_MODE0);
 }
 
 uint32_t TLC5955::getSpiBaudRate()
@@ -159,7 +162,7 @@ void TLC5955::setAllLedRgb(uint16_t red, uint16_t green, uint16_t blue)
 void TLC5955::flushBuffer()
 {
   setControlModeBit(CONTROL_MODE_OFF);
-  SPI.beginTransaction(mSettings));
+  SPI.beginTransaction(mSettings);
   for (int16_t fCount = 0; fCount < _tlc_count * TOTAL_REGISTER_SIZE / 8; fCount++)
     SPI.transfer(0);
   SPI.endTransaction();
