@@ -144,7 +144,7 @@ private:
   uint8_t _buffer;
   int8_t _buffer_count = 7;
   SPISettings mSettings;
-  uint32_t spi_baud_rate = 1000000;
+  uint32_t spi_baud_rate = 1500000;
   uint32_t gsclk_frequency = 2500000;
 };
 
