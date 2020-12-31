@@ -60,7 +60,7 @@ class TLC5955
 public:
 
 /* Initialization */
-void init(uint8_t gslat, uint8_t spi_mosi, uint8_t spi_clk, uint8_t gsclk);
+void init(uint8_t gslat, uint8_t spi_mosi, uint8_t spi_clk, uint8_t gsclk, uint32_t spi_baud_rate=1000000);
 void deallocate();
 
 /* Setting individual LED intensities */
@@ -140,7 +140,7 @@ private:
   /* SPI */
   uint8_t _buffer;
   int8_t _buffer_count = 7;
-  uint32_t spi_baud_rate = 1000000;
+  uint32_t spi_baud_rate;
   uint32_t gsclk_frequency = 2500000;
 
   SPISettings mSettings;

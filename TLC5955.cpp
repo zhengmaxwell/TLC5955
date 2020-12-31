@@ -31,13 +31,14 @@
 #include <SPI.h>
 #include <Arduino.h>
 
-void TLC5955::init(uint8_t gslat, uint8_t spi_mosi, uint8_t spi_clk, uint8_t gsclk)
+void TLC5955::init(uint8_t gslat, uint8_t spi_mosi, uint8_t spi_clk, uint8_t gsclk, uint32_t spi_baud_rate)
 {
 
   _gslat = gslat;
   _spi_clk = spi_clk;
   _spi_mosi = spi_mosi;
   _gsclk = gsclk;
+  this->spi_baud_rate = spi_baud_rate;
 
   mSettings = SPISettings(spi_baud_rate, MSBFIRST, SPI_MODE0);
 
