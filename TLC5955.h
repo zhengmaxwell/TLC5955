@@ -91,6 +91,7 @@ void setBuffer(uint8_t bit);
 void setControlModeBit(bool isControlMode);
 void flushBuffer();
 void updateLeds();
+void clearLeds();
 void latch();
 void updateControl();
 void setSpiBaudRate(uint32_t new_baud_rate);
