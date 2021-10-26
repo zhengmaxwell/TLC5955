@@ -375,13 +375,14 @@ void TLC5955::setMaxCurrent(uint8_t MCRGB)
   _MCB = MCRGB;
 }
 
-uint8_t TLC5955::getMaxCurrent()
+uint8_t* TLC5955::getMaxCurrent()
 {
-  return _MCR;
-  // uint8_t maxCurrent[] = {_MCR, _MCG, _MCB};
-  // uint8_t maxCurrent[] = {7, 7, 7};
+  static uint8_t maxCurrent[3];
+  maxCurrent[0] = _MCR;
+  maxCurrent[1] = _MCG;
+  maxCurrent[2] = _MCB;
 
-  // return maxCurrent;
+  return maxCurrent;
 }
 
 // Defines functional bits in settings - see datasheet for what
