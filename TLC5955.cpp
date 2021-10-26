@@ -340,7 +340,12 @@ void TLC5955::setLed(uint16_t led_number, uint16_t rgb)
   _grayscale_data[chip][channel][0] = rgb;
 }
 
-
+// Assume all LEDs are the same
+uint8_t* TLC5955:getGrayscale()
+{
+  uint8_t grayscale[] = {_grayscale_data[0][0][0], _grayscale_data[0][0][1], _grayscale_data[0][0][2]};
+  return grayscale;
+}
 
 void TLC5955::setMaxCurrent(uint8_t MCR, uint8_t MCG, uint8_t MCB)
 {

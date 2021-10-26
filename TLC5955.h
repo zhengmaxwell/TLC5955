@@ -75,6 +75,7 @@ void setChannel(uint16_t channel_number, uint16_t value);
 uint16_t getChannelValue(uint16_t channelNum, int color_channel_index);
 
 /* Control Mode Parameters */
+uint8_t* getGrayscale();
 void setBrightnessCurrent(uint8_t global);
 void setBrightnessCurrent(uint8_t red, uint8_t green, uint8_t blue);
 uint8_t* getBrightnessCurrent();
