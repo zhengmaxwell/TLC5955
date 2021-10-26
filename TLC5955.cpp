@@ -343,6 +343,12 @@ void TLC5955::setMaxCurrent(uint8_t MCRGB)
   _MCB = MCRGB;
 }
 
+uint8_t* TLC5955::getMaxCurrent()
+{
+  uint8_t maxCurrent[] = {_MCR, MCG, MCB};
+  return maxCurrent;
+}
+
 // Defines functional bits in settings - see datasheet for what
 void TLC5955::setFunctionData(bool DSPRPT, bool TMGRST, bool RFRESH, bool ESPWM, bool LSDVLT)
 {
@@ -371,6 +377,12 @@ void TLC5955::setBrightnessCurrent(uint8_t red, uint8_t green, uint8_t blue)
   _bright_blue = blue;
 }
 
+uint8_t* TLC5955::getBrightnessCurrent()
+{
+  uint8_t brightnessCurrent[] = {_bright_red, bright_red, _bright_blue};
+  return brightnessCurrent;
+}
+
 // Sets all dot correction data to the same value (default should be 255
 void TLC5955::setAllDcData(uint8_t dcvalue)
 {
@@ -393,6 +405,13 @@ void TLC5955::setLedDc(uint16_t led_number, uint8_t color_channel_number, uint8_
     _dc_data[chip][channel][color_channel_number] = dc_value;
   } else
     Serial.println(F("ERROR (TLC5955::setLedDc) : Invalid color channel number"));
+}
+
+// Assumes all LEDs are the same
+uint8_t* TLC5955::getDc()
+{
+  uint8_t dc[] = {_dc_data[0][0][0], _dc_data[0][0][1], _dc_data[0][0][2]};
+  return dc;
 }
 
 // Update the Control Register (changes settings)
