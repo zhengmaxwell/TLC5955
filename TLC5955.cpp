@@ -39,6 +39,8 @@ void TLC5955::init(uint8_t gslat, uint8_t spi_mosi, uint8_t spi_clk, uint8_t gsc
   _spi_mosi = spi_mosi;
   _gsclk = gsclk;
 
+  mSettings = SPISettings(spi_baud_rate, MSBFIRST, SPI_MODE0);
+
   // Initialize SPI library
   SPI.setMOSI(_spi_mosi);
   SPI.begin();
@@ -59,6 +61,8 @@ void TLC5955::setSpiBaudRate(uint32_t new_baud_rate)
 {
   // Store old baud rate
   spi_baud_rate = new_baud_rate;
+
+  mSettings = SPISettings(spi_baud_rate, MSBFIRST, SPI_MODE0);
 }
 
 uint32_t TLC5955::getSpiBaudRate()
@@ -158,7 +162,7 @@ void TLC5955::setAllLedRgb(uint16_t red, uint16_t green, uint16_t blue)
 void TLC5955::flushBuffer()
 {
   setControlModeBit(CONTROL_MODE_OFF);
-  SPI.beginTransaction(SPISettings(spi_baud_rate, MSBFIRST, SPI_MODE0));
+  SPI.beginTransaction(mSettings);
   for (int16_t fCount = 0; fCount < _tlc_count * TOTAL_REGISTER_SIZE / 8; fCount++)
     SPI.transfer(0);
   SPI.endTransaction();
@@ -241,7 +245,7 @@ void TLC5955::updateLeds()
   for (int16_t chip = (int8_t)_tlc_count - 1; chip >= 0; chip--)
   {
     setControlModeBit(CONTROL_MODE_OFF);
-    SPI.beginTransaction(SPISettings(spi_baud_rate, MSBFIRST, SPI_MODE0));
+    SPI.beginTransaction(mSettings);
     uint8_t color_channel_ordered;
     for (int8_t led_channel_index = (int8_t)LEDS_PER_CHIP - 1; led_channel_index >= 0; led_channel_index--)
     {
@@ -260,6 +264,29 @@ void TLC5955::updateLeds()
   {
     Serial.println(F("End LED Update String (All Chips)"));
   }
+  latch();
+}
+
+void TLC5955::clearLeds()
+{
+    for (int16_t chip = (int8_t)_tlc_count - 1; chip >= 0; chip--)
+  {
+    setControlModeBit(CONTROL_MODE_OFF);
+    SPI.beginTransaction(SPISettings(spi_baud_rate, MSBFIRST, SPI_MODE0));
+    uint8_t color_channel_ordered;
+    for (int8_t led_channel_index = (int8_t)LEDS_PER_CHIP - 1; led_channel_index >= 0; led_channel_index--)
+    {
+      for (int8_t color_channel_index = (int8_t)COLOR_CHANNEL_COUNT - 1; color_channel_index >= 0; color_channel_index--)
+      {
+        color_channel_ordered = _rgb_order[chip][led_channel_index][(uint8_t) color_channel_index];
+
+        SPI.transfer((char) (uint16_t) 0); // Output MSB first
+        SPI.transfer((char) (uint16_t) 0); // Followed by LSB
+      }
+    }
+    SPI.endTransaction();
+  }
+
   latch();
 }
 
@@ -492,7 +519,7 @@ void TLC5955::setBuffer(uint8_t bit)
 {
   bitWrite(_buffer, _buffer_count, bit);
   _buffer_count--;
-  SPI.beginTransaction(SPISettings(spi_baud_rate, MSBFIRST, SPI_MODE0));
+  SPI.beginTransaction(mSettings);
   if (_buffer_count == -1)
   {
     if (debug >= 2)
