@@ -379,7 +379,7 @@ void TLC5955::setBrightnessCurrent(uint8_t red, uint8_t green, uint8_t blue)
 
 uint8_t* TLC5955::getBrightnessCurrent()
 {
-  uint8_t brightnessCurrent[] = {_bright_red, bright_red, _bright_blue};
+  uint8_t brightnessCurrent[] = {_bright_red, _bright_green, _bright_blue};
   return brightnessCurrent;
 }
 
