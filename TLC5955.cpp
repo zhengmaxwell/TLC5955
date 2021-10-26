@@ -377,7 +377,7 @@ void TLC5955::setMaxCurrent(uint8_t MCRGB)
 
 uint8_t TLC5955::getMaxCurrent()
 {
-  return 7;
+  return _MCR;
   // uint8_t maxCurrent[] = {_MCR, _MCG, _MCB};
   // uint8_t maxCurrent[] = {7, 7, 7};
 
