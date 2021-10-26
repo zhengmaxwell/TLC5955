@@ -343,7 +343,7 @@ void TLC5955::setLed(uint16_t led_number, uint16_t rgb)
 // Assume all LEDs are the same
 uint8_t* TLC5955::getGrayscale()
 {
-  uint8_t grayscale[] = {_grayscale_data[0][0][0], _grayscale_data[0][0][1], _grayscale_data[0][0][2]};
+  static uint8_t grayscale[3] = {_grayscale_data[0][0][0], _grayscale_data[0][0][1], _grayscale_data[0][0][2]};
   return grayscale;
 }
 
@@ -378,10 +378,6 @@ void TLC5955::setMaxCurrent(uint8_t MCRGB)
 uint8_t* TLC5955::getMaxCurrent()
 {
   static uint8_t maxCurrent[3] = {_MCR, _MCG, _MCB};
-  // maxCurrent[0] = _MCR;
-  // maxCurrent[1] = _MCG;
-  // maxCurrent[2] = _MCB;
-
   return maxCurrent;
 }
 
@@ -415,7 +411,7 @@ void TLC5955::setBrightnessCurrent(uint8_t red, uint8_t green, uint8_t blue)
 
 uint8_t* TLC5955::getBrightnessCurrent()
 {
-  uint8_t brightnessCurrent[] = {_bright_red, _bright_green, _bright_blue};
+  static uint8_t brightnessCurrent[3] = {_bright_red, _bright_green, _bright_blue};
   return brightnessCurrent;
 }
 
@@ -446,7 +442,7 @@ void TLC5955::setLedDc(uint16_t led_number, uint8_t color_channel_number, uint8_
 // Assumes all LEDs are the same
 uint8_t* TLC5955::getDc()
 {
-  uint8_t dc[] = {_dc_data[0][0][0], _dc_data[0][0][1], _dc_data[0][0][2]};
+  static uint8_t dc[3] = {_dc_data[0][0][0], _dc_data[0][0][1], _dc_data[0][0][2]};
   return dc;
 }
 
