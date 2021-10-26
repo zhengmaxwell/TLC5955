@@ -84,7 +84,7 @@ void setLedDc(uint16_t led_number, uint8_t color_channel_index, uint8_t dc_value
 uint8_t* getDc();
 void setMaxCurrent(uint8_t MCR, uint8_t MCG, uint8_t MCB);
 void setMaxCurrent(uint8_t MCRGB);
-uint8_t* getMaxCurrent();
+uint8_t getMaxCurrent();
 void setFunctionData(bool DSPRPT, bool TMGRST, bool RFRESH, bool ESPWM, bool LSDVLT);
 void setRgbPinOrder(uint8_t rPos, uint8_t grPos, uint8_t bPos);
 void setPinOrderSingle(uint16_t channel, uint8_t color_channel_index, uint8_t position);
