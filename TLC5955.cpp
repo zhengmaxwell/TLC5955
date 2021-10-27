@@ -442,7 +442,7 @@ void TLC5955::setLedDc(uint16_t led_number, uint8_t color_channel_number, uint8_
 // Assumes all LEDs are the same
 uint8_t* TLC5955::getDc()
 {
-  static uint8_t dc[3] = {_dc_data[0][0][0], _dc_data[0][0][1], _dc_data[0][0][2]};
+  volatile static uint8_t dc[3] = {_dc_data[0][0][0], _dc_data[0][0][1], _dc_data[0][0][2]};
   return dc;
 }
 
