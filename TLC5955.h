@@ -75,16 +75,16 @@ void setChannel(uint16_t channel_number, uint16_t value);
 uint16_t getChannelValue(uint16_t channelNum, int color_channel_index);
 
 /* Control Mode Parameters */
-uint8_t* getGrayscale();
+void getGrayscale(uint8_t[] grayscale);
 void setBrightnessCurrent(uint8_t global);
 void setBrightnessCurrent(uint8_t red, uint8_t green, uint8_t blue);
-uint8_t* getBrightnessCurrent();
+void getBrightnessCurrent(uint8_t[] brightnessCurrent);
 void setAllDcData(uint8_t dcvalue);
 void setLedDc(uint16_t led_number, uint8_t color_channel_index, uint8_t dc_value);
-uint8_t* getDc();
+void getDc(uint8_t[] dotCorrection);
 void setMaxCurrent(uint8_t MCR, uint8_t MCG, uint8_t MCB);
 void setMaxCurrent(uint8_t MCRGB);
-uint8_t* getMaxCurrent();
+void getMaxCurrent(uint8_t[] maxCurrent);
 void setFunctionData(bool DSPRPT, bool TMGRST, bool RFRESH, bool ESPWM, bool LSDVLT);
 void setRgbPinOrder(uint8_t rPos, uint8_t grPos, uint8_t bPos);
 void setPinOrderSingle(uint16_t channel, uint8_t color_channel_index, uint8_t position);
@@ -138,9 +138,9 @@ private:
   int16_t _bright_red;
   int16_t _bright_green;
   int16_t _bright_blue;
-  int8_t _MCR;
-  int8_t _MCG;
-  int8_t _MCB;
+  int8_t[3] _MC;
+//   int8_t _MCG;
+//   int8_t _MCB;
 
   /* SPI */
   uint8_t _buffer;

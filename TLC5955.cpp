@@ -341,10 +341,11 @@ void TLC5955::setLed(uint16_t led_number, uint16_t rgb)
 }
 
 // Assume all LEDs are the same
-uint8_t* TLC5955::getGrayscale()
+void TLC5955::getGrayscale(uint8_t[] grayscale)
 {
-  static uint8_t grayscale[3] = {_grayscale_data[1][0][0], _grayscale_data[1][0][1], _grayscale_data[1][0][2]};
-  return grayscale;
+  grayscale[0] = _grayscale_data[0][0][0];
+  grayscale[1] = _grayscale_data[0][0][1];
+  grayscale[2] = _grayscale_data[0][0][2];
 }
 
 void TLC5955::setMaxCurrent(uint8_t MCR, uint8_t MCG, uint8_t MCB)
@@ -375,10 +376,11 @@ void TLC5955::setMaxCurrent(uint8_t MCRGB)
   _MCB = MCRGB;
 }
 
-uint8_t* TLC5955::getMaxCurrent()
+void TLC5955::getMaxCurrent(uint8_t[] maxCurrent)
 {
-  uint8_t maxCurrent[3] = {_MCR, _MCG, _MCB};
-  return maxCurrent;
+  maxCurrent[0] = _MCR;
+  maxCurrent[1] = _MCG;
+  maxCurrent[2] = _MCB;
 }
 
 // Defines functional bits in settings - see datasheet for what
@@ -409,10 +411,11 @@ void TLC5955::setBrightnessCurrent(uint8_t red, uint8_t green, uint8_t blue)
   _bright_blue = blue;
 }
 
-uint8_t* TLC5955::getBrightnessCurrent()
+void TLC5955::getBrightnessCurrent(uint8_t[] brightnessCurrent)
 {
-  static uint8_t brightnessCurrent[3] = {_bright_red, _bright_green, _bright_blue};
-  return brightnessCurrent;
+  brightnessCurrent[0] = _bright_red;
+  brightnessCurrent[1] = _bright_green;
+  brightnessCurrent[2] = _bright_blue;
 }
 
 // Sets all dot correction data to the same value (default should be 255
@@ -440,10 +443,11 @@ void TLC5955::setLedDc(uint16_t led_number, uint8_t color_channel_number, uint8_
 }
 
 // Assumes all LEDs are the same
-uint8_t* TLC5955::getDc()
+void TLC5955::getDc(uint8_t[] dotCorrection)
 {
-  static uint8_t dc[3] = {_dc_data[0][0][0], _dc_data[0][0][1], _dc_data[0][0][2]};
-  return dc;
+  dotCorrection[0] = _dc_data[0][0][0];
+  dotCorrection[1] = _dc_data[0][0][1];
+  dotCorrection[2] = _dc_data[0][0][2];
 }
 
 // Update the Control Register (changes settings)
