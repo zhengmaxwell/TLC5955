@@ -73,6 +73,7 @@ void setChannel(uint16_t channel_number, uint16_t value);
 
 /* Get LED Intensities */
 uint16_t getChannelValue(uint16_t channelNum, int color_channel_index);
+float getTotalCurrent();
 
 /* Control Mode Parameters */
 void getGrayscale(uint8_t grayscale[]);
@@ -127,6 +128,9 @@ static uint16_t _grayscale_data[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
 
 uint8_t rgb_order_default[3] = {0, 1, 2};
 
+  // Analog Control Values
+  const float maxCurrentValues[] = {3.2, 8.0, 11.2, 15.9, 19.1, 23.9, 27.5, 31.9};
+
 private:
   int debug = 0;
   uint8_t _gslat;
@@ -135,12 +139,14 @@ private:
   uint8_t _gsclk;
 
   uint8_t _function_data;
-  int16_t _bright_red;
-  int16_t _bright_green;
-  int16_t _bright_blue;
-  int8_t _MCR;
-  int8_t _MCG;
-  int8_t _MCB;
+//   int16_t _bright_red;
+//   int16_t _bright_green;
+//   int16_t _bright_blue;
+//   int8_t _MCR;
+//   int8_t _MCG;
+//   int8_t _MCB;
+  uint8_t[3] _BC;
+  uint8_t[3] _MC;
 
   /* SPI */
   uint8_t _buffer;

@@ -340,6 +340,20 @@ void TLC5955::setLed(uint16_t led_number, uint16_t rgb)
   _grayscale_data[chip][channel][0] = rgb;
 }
 
+// Assume all LEDs are the same for Dot Correction and Grayscale
+// Assume each driver is powering max number of LEDs
+float TLC5955::getTotalCurrent()
+{
+  float current = 0;
+  int total_leds = _tlc_count * LEDS_PER_CHIP;
+  for (int i = 0; i < 3; i++)
+  {
+    current += maxCurrentValues[_MC[i]] * (0.263 + 0.738 * _dc_data[0][0][i] / 127)
+              * (0.1 + 0.9 * _BC[i] / 127) * _grayscale_data[0][0][i] total_leds;
+  }
+  return current;
+}
+
 // Assume all LEDs are the same
 void TLC5955::getGrayscale(uint8_t grayscale[])
 {
@@ -353,17 +367,17 @@ void TLC5955::setMaxCurrent(uint8_t MCR, uint8_t MCG, uint8_t MCB)
   // Ensure max Current agrees with datasheet (3-bit)
   if (MCR > 7)
     MCR = 7;
-  _MCR = MCR;
+  _MC[0] = MCR;
 
   // Ensure max Current agrees with datasheet (3-bit)
   if (MCG > 7)
     MCG = 7;
-  _MCG = MCG;
+  _MC[1] = MCG;
 
   // Ensure max Current agrees with datasheet (3-bit)
   if (MCB > 7)
     MCB = 7;
-  _MCB = MCB;
+  _MC[2] = MCB;
 }
 
 void TLC5955::setMaxCurrent(uint8_t MCRGB)
@@ -371,16 +385,16 @@ void TLC5955::setMaxCurrent(uint8_t MCRGB)
   // Ensure max Current agrees with datasheet (3-bit)
   if (MCRGB > 7)
     MCRGB = 7;
-  _MCR = MCRGB;
-  _MCG = MCRGB;
-  _MCB = MCRGB;
+  _MC[0] = MCRGB;
+  _MC[1] = MCRGB;
+  _MC[2] = MCRGB;
 }
 
 void TLC5955::getMaxCurrent(uint8_t maxCurrent[])
 {
-  maxCurrent[0] = _MCR;
-  maxCurrent[1] = _MCG;
-  maxCurrent[2] = _MCB;
+  maxCurrent[0] = _MC[0];
+  maxCurrent[1] = _MC[1];
+  maxCurrent[2] = _MC[2];
 }
 
 // Defines functional bits in settings - see datasheet for what
@@ -398,24 +412,24 @@ void TLC5955::setFunctionData(bool DSPRPT, bool TMGRST, bool RFRESH, bool ESPWM,
 // Set Brightness through CURRENT from 10-100% of value set in function mode
 void TLC5955::setBrightnessCurrent(uint8_t rgb)
 {
-  _bright_red = rgb;
-  _bright_green = rgb;
-  _bright_blue = rgb;
+  _BC[0] = rgb;
+  _BC[1] = rgb;
+  _BC[2] = rgb;
 }
 
 // Set Brightness through CURRENT from 10-100% of value set in function mode
 void TLC5955::setBrightnessCurrent(uint8_t red, uint8_t green, uint8_t blue)
 {
-  _bright_red = red;
-  _bright_green = green;
-  _bright_blue = blue;
+  _BC[0] = red;
+  _BC[1] = green;
+  _BC[2] = blue;
 }
 
 void TLC5955::getBrightnessCurrent(uint8_t brightnessCurrent[])
 {
-  brightnessCurrent[0] = _bright_red;
-  brightnessCurrent[1] = _bright_green;
-  brightnessCurrent[2] = _bright_blue;
+  brightnessCurrent[0] = _BC[0];
+  brightnessCurrent[1] = _BC[1];
+  brightnessCurrent[2] = _BC[2];
 }
 
 // Sets all dot correction data to the same value (default should be 255
@@ -471,20 +485,20 @@ void TLC5955::updateControl()
         setBuffer((_function_data & (1 << a)));
       // Blue Brightness
       for (int8_t a = GB_BITS - 1; a >= 0; a--)
-        setBuffer((_bright_blue & (1 << a)));
+        setBuffer((_BC[2] & (1 << a)));
       // Green Brightness
       for (int8_t a = GB_BITS - 1; a >= 0; a--)
-        setBuffer((_bright_green & (1 << a)));
+        setBuffer((_BC[1] & (1 << a)));
       // Red Brightness
       for (int8_t a = GB_BITS - 1; a >= 0; a--)
-        setBuffer((_bright_red & (1 << a)));
+        setBuffer((_BC[0] & (1 << a)));
       // Maximum Current Data
       for (int8_t a = MC_BITS - 1; a >= 0; a--)
-        setBuffer((_MCB & (1 << a)));
+        setBuffer((_MC[2] & (1 << a)));
       for (int8_t a = MC_BITS - 1; a >= 0; a--)
-        setBuffer((_MCG & (1 << a)));
+        setBuffer((_MC[1] & (1 << a)));
       for (int8_t a = MC_BITS - 1; a >= 0; a--)
-        setBuffer((_MCR & (1 << a)));
+        setBuffer((_MC[0] & (1 << a)));
 
       // Dot Correction data
       for (int8_t a = LEDS_PER_CHIP - 1; a >= 0; a--)
