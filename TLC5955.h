@@ -138,9 +138,9 @@ private:
   int16_t _bright_red;
   int16_t _bright_green;
   int16_t _bright_blue;
-  int8_t[3] _MC;
-//   int8_t _MCG;
-//   int8_t _MCB;
+  int8_t _MCR;
+  int8_t _MCG;
+  int8_t _MCB;
 
   /* SPI */
   uint8_t _buffer;
