@@ -135,12 +135,12 @@ private:
   uint8_t _gsclk;
 
   uint8_t _function_data;
-  uint16_t _bright_red;
-  uint16_t _bright_green;
-  uint16_t _bright_blue;
-  uint8_t _MCR;
-  uint8_t _MCG;
-  uint8_t _MCB;
+  volatile int16_t _bright_red;
+  volatile int16_t _bright_green;
+  volatile int16_t _bright_blue;
+  volatile int8_t _MCR;
+  volatile int8_t _MCG;
+  volatile int8_t _MCB;
 
   /* SPI */
   uint8_t _buffer;
