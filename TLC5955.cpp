@@ -349,7 +349,7 @@ float TLC5955::getTotalCurrent()
   for (int i = 0; i < 3; i++)
   {
     current += maxCurrentValues[_MC[i]] * (0.263 + 0.738 * _dc_data[0][0][i] / 127)
-              * (0.1 + 0.9 * _BC[i] / 127) * _grayscale_data[0][0][i] total_leds;
+              * (0.1 + 0.9 * _BC[i] / 127) * _grayscale_data[0][0][i] * total_leds;
   }
   return current;
 }
