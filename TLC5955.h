@@ -145,8 +145,8 @@ private:
 //   int8_t _MCR;
 //   int8_t _MCG;
 //   int8_t _MCB;
-  uint8_t[3] _BC;
-  uint8_t[3] _MC;
+  uint8_t _BC[3];
+  uint8_t _MC[3];
 
   /* SPI */
   uint8_t _buffer;
