@@ -73,7 +73,7 @@ void setChannel(uint16_t channel_number, uint16_t value);
 
 /* Get LED Intensities */
 uint16_t getChannelValue(uint16_t channelNum, int color_channel_index);
-float getTotalCurrent();
+void getLedCurrents();
 
 /* Control Mode Parameters */
 void getGrayscale(uint8_t grayscale[]);

@@ -341,18 +341,14 @@ void TLC5955::setLed(uint16_t led_number, uint16_t rgb)
 }
 
 // Assume all LEDs are the same for Dot Correction and Grayscale
-// Assume each driver is powering max number of LEDs
-// Returns A
-float TLC5955::getTotalCurrent()
+// Current per LED per channel in mA
+void TLC5955::getLedCurrents(float currents[])
 {
-  float current = 0;
-  int total_leds = _tlc_count * LEDS_PER_CHIP;
   for (int i = 0; i < 3; i++)
   {
-    current += maxCurrentValues[_MC[i]] * (0.262 + 0.738 * _dc_data[0][0][i] / 127)
-              * (0.1 + 0.9 * _BC[i] / 127); //* _grayscale_data[0][0][i] * total_leds / 1000;
+    currents[i] = maxCurrentValues[_MC[i]] * (0.262 + 0.738 * _dc_data[0][0][i] / 127)
+              * (0.1 + 0.9 * _BC[i] / 127); //* _grayscale_data[0][0][i]
   }
-  return current;
 }
 
 // Assume all LEDs are the same
