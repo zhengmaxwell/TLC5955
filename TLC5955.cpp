@@ -515,21 +515,30 @@ void TLC5955::updateControl()
       for (int8_t a = FC_BITS - 1; a >= 0; a--)
         setBuffer((_function_data & (1 << a)));
       // Blue Brightness
-      for (int8_t a = GB_BITS - 1; a >= 0; a--)
-        setBuffer((_BC[2] & (1 << a)));
-      // Green Brightness
-      for (int8_t a = GB_BITS - 1; a >= 0; a--)
-        setBuffer((_BC[1] & (1 << a)));
-      // Red Brightness
-      for (int8_t a = GB_BITS - 1; a >= 0; a--)
-        setBuffer((_BC[0] & (1 << a)));
+      // for (int8_t a = GB_BITS - 1; a >= 0; a--)
+      //   setBuffer((_BC[2] & (1 << a)));
+      // // Green Brightness
+      // for (int8_t a = GB_BITS - 1; a >= 0; a--)
+      //   setBuffer((_BC[1] & (1 << a)));
+      // // Red Brightness
+      // for (int8_t a = GB_BITS - 1; a >= 0; a--)
+      //   setBuffer((_BC[0] & (1 << a)));
+      // Brightness Control Data
+      for (int8_t b = COLOR_CHANNEL_COUNT -1; b >= 0; b--)
+      {
+        for (int8_t a = GB_BITS - 1; a >= 0; a--)
+          setBuffer((_BC[b] & (1 << a)));
+      }
       // Maximum Current Data
-      for (int8_t a = MC_BITS - 1; a >= 0; a--)
-        setBuffer((_MC[2] & (1 << a)));
-      for (int8_t a = MC_BITS - 1; a >= 0; a--)
-        setBuffer((_MC[1] & (1 << a)));
-      for (int8_t a = MC_BITS - 1; a >= 0; a--)
-        setBuffer((_MC[0] & (1 << a)));
+      for (int8_t b = COLOR_CHANNEL_COUNT - 1; b >= 0; b--)
+      {
+        for (int8_t a = MC_BITS - 1; a >= 0; a--)
+          setBuffer((_MC[b] & (1 << a)));
+      }
+      // for (int8_t a = MC_BITS - 1; a >= 0; a--)
+      //   setBuffer((_MC[1] & (1 << a)));
+      // for (int8_t a = MC_BITS - 1; a >= 0; a--)
+      //   setBuffer((_MC[0] & (1 << a)));
       // Dot Correction Data
       // for (int8_t a = DC_BITS - 1; a >= 0; a--)
       //   setBuffer((_DC[2] & (1 << a)));
@@ -539,14 +548,14 @@ void TLC5955::updateControl()
       //   setBuffer((_DC[0] & (1 << a)));
 
       // // Dot Correction Data
-      // for (int8_t a = LEDS_PER_CHIP - 1; a >= 0; a--)
-      // {
+      for (int8_t a = LEDS_PER_CHIP - 1; a >= 0; a--)
+      {
         for (int8_t b = COLOR_CHANNEL_COUNT - 1; b >= 0; b--)
         {
           for (int8_t c = DC_BITS - 1; c >= 0; c--)
             setBuffer(_DC[b] & (1 << c));
         }
-      // }
+      }
 
       // if (debug >= 2)
     }
