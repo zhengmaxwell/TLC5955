@@ -36,10 +36,10 @@ void TLC5955::init(uint8_t gslat, uint8_t spi_mosi, uint8_t spi_clk, uint8_t gsc
 
   for (int i = 0; i < LEDS_PER_CHIP; i++)
   {
-    _grayscale_data[i] = (uint16_t*)malloc(LEDS_PER_CHIP * sizeof(uint16_t));
+    _grayscale_data[i] = (uint16_t**)malloc(LEDS_PER_CHIP * sizeof(uint16_t*));
     for (int j = 0; j < COLOR_CHANNEL_COUNT; j++)
     {
-      _grayscale_data[i][j] = (uint16_t*)_malloc(COLOR_CHANNEL_COUNT * sizeof(uint16_t));
+      _grayscale_data[i][j] = (uint16_t*)malloc(COLOR_CHANNEL_COUNT * sizeof(uint16_t));
     }
   }
 

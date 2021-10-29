@@ -142,7 +142,7 @@ private:
   uint8_t _MC[3];
   uint8_t _BC[3];
   uint8_t _DC[3];
-  uint16_t* _grayscale_data = (uint16_t*)malloc(_tlc_count * sizeof(uint16_t));
+  uint16_t*** _grayscale_data = (uint16_t***)malloc(_tlc_count * sizeof(uint16_t**));
   // for (int i = 0; i < LEDS_PER_CHIP; i++)
   // {
   //   _GS[i] = (uint16_t*)malloc(LEDS_PER_CHIP * sizeof(uint16_t));
