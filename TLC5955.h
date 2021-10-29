@@ -37,11 +37,11 @@
 #include <SPI.h>
 
 /* Bit Quantities (Change to match other TLC driver chips) */
-#define FC_BITS 5
 #define GS_BITS 16
 #define MC_BITS 3
 #define BC_BITS 7
 #define DC_BITS 7
+#define FC_BITS 5
 #define CONTROL_ZERO_BITS 389   /* Bits required for correct control reg size */
 #define TOTAL_REGISTER_SIZE 76
 #define LATCH_DELAY 1
@@ -83,8 +83,6 @@ void getMaxCurrent(uint8_t maxCurrent[]);
 void setBrightnessControl(uint8_t bc);
 void setBrightnessControl(uint8_t bcr, uint8_t bcg, uint8_t bcb);
 void getBrightnessControl(uint8_t brightnessControl[]);
-// void setAllDcData(uint8_t dcr, uint8_t dcg, uint8_t dcb);
-// void setLedDc(uint16_t led_number, uint8_t color_channel_index, uint8_t dc_value);
 void setDotCorrection(uint8_t dc);
 void setDotCorrection(uint8_t dcr, uint8_t dcg, uint8_t dcb);
 void getDotCorrection(uint8_t dotCorrection[]);
@@ -126,7 +124,7 @@ static float max_current_amps;
 
 // static uint8_t _dc_data[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
 static uint8_t _rgb_order[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
-uint16_t _grayscale_data[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
+static uint16_t _grayscale_data[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
 
 uint8_t rgb_order_default[3] = {0, 1, 2};
 

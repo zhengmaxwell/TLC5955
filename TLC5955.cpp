@@ -366,12 +366,12 @@ void TLC5955::setFunctionData(bool DSPRPT, bool TMGRST, bool RFRESH, bool ESPWM,
 // Assume all LEDs are the same
 void TLC5955::getGrayscale(uint8_t grayscale[])
 {
-  grayscale[0] = _grayscale_data[0][0][0];
-  grayscale[1] = _grayscale_data[0][0][1];
-  grayscale[2] = _grayscale_data[0][0][2];
+  grayscale[0] = _grayscale_data[_tlc_count-1][15][0];
+  grayscale[1] = _grayscale_data[_tlc_count-1][15][1];
+  grayscale[2] = _grayscale_data[_tlc_count-1][15][2];
 }
 
-void TLC5955::setMaxCurrent(uint8_t mcrgb)
+void TLC5955::setMaxCurrent(uint8_t mc)
 {
   // Ensure max Current agrees with datasheet (3-bit)
   if (mcrgb > 7)
