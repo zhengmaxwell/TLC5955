@@ -407,7 +407,7 @@ void TLC5955::getMaxCurrent(uint8_t maxCurrent[])
 }
 
 // Set Brightness through CURRENT from 10-100% of value set in function mode
-void TLC5955::setBrightnessCurrent(uint8_t bc)
+void TLC5955::setBrightnessControl(uint8_t bc)
 {
   if (bc > 127)
     bc = 127;
@@ -417,7 +417,7 @@ void TLC5955::setBrightnessCurrent(uint8_t bc)
 }
 
 // Set Brightness through CURRENT from 10-100% of value set in function mode
-void TLC5955::setBrightnessCurrent(uint8_t bcr, uint8_t bcg, uint8_t bcb)
+void TLC5955::setBrightnessControl(uint8_t bcr, uint8_t bcg, uint8_t bcb)
 {
   if (bcr > 127)
     bcr = 127;
@@ -432,36 +432,12 @@ void TLC5955::setBrightnessCurrent(uint8_t bcr, uint8_t bcg, uint8_t bcb)
   _BC[2] = bcb;
 }
 
-void TLC5955::getBrightnessCurrent(uint8_t brightnessCurrent[])
+void TLC5955::getBrightnessControl(uint8_t brightnessControl[])
 {
-  brightnessCurrent[0] = _BC[0];
-  brightnessCurrent[1] = _BC[1];
-  brightnessCurrent[2] = _BC[2];
+  brightnessControl[0] = _BC[0];
+  brightnessControl[1] = _BC[1];
+  brightnessControl[2] = _BC[2];
 }
-
-// void TLC5955::setAllDcData(uint8_t dcr, uint8_t dcg, uint8_t dcb)
-// {
-//   for (int8_t chip = _tlc_count - 1; chip >= 0; chip--)
-//   {
-//     for (int8_t a = LEDS_PER_CHIP - 1; a >= 0; a--)
-//     {
-//       _dc_data[chip][a][0] = dcr;
-//       _dc_data[chip][a][1] = dcg;
-//       _dc_data[chip][a][2] = dcb;
-//     }
-//   }
-// }
-
-// void TLC5955::setLedDc(uint16_t led_number, uint8_t color_channel_number, uint8_t dc_value)
-// {
-//   if (color_channel_number < COLOR_CHANNEL_COUNT)
-//   {
-//     uint8_t chip = (uint16_t)floor(led_number / LEDS_PER_CHIP);
-//     uint8_t channel = (uint8_t)(led_number - LEDS_PER_CHIP * chip);
-//     _dc_data[chip][channel][color_channel_number] = dc_value;
-//   } else
-//     Serial.println(F("ERROR (TLC5955::setLedDc) : Invalid color channel number"));
-// }
 
 void TLC5955::setDotCorrection(uint8_t dc)
 {
