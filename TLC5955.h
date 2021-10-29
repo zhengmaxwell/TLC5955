@@ -37,10 +37,10 @@
 #include <SPI.h>
 
 /* Bit Quantities (Change to match other TLC driver chips) */
-#define GS_BITS 16
-#define GB_BITS 7
-#define MC_BITS 3
 #define FC_BITS 5
+#define GS_BITS 16
+#define MC_BITS 3
+#define BC_BITS 7
 #define DC_BITS 7
 #define CONTROL_ZERO_BITS 389   /* Bits required for correct control reg size */
 #define TOTAL_REGISTER_SIZE 76

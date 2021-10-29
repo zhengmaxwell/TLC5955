@@ -346,8 +346,9 @@ void TLC5955::getLedCurrents(float currents[])
 {
   for (int i = 0; i < 3; i++)
   {
-    currents[i] = maxCurrentValues[_MC[i]] * (0.262 + 0.738 * _DC[i] / 127)
-              * (0.1 + 0.9 * _BC[i] / 127); //* _grayscale_data[0][0][i]
+    currents[i] = maxCurrentValues[_MC[i]] * (0.262 + 0.738 * _DC[i] / (2**DC_BITS - 1))
+              * (0.1 + 0.9 * _BC[i] / (2**BC_BITS - 1)));
+              //* _grayscale_data[0][0][i] / (2**GS_BITS - 1)
   }
 }
 
@@ -496,7 +497,7 @@ void TLC5955::updateControl()
         for (int8_t a = MC_BITS - 1; a >= 0; a--)
           setBuffer((_MC[b] & (1 << a)));
         // Brightness Control Data
-        for (int8_t a = GB_BITS - 1; a >= 0; a--)
+        for (int8_t a = BC_BITS - 1; a >= 0; a--)
           setBuffer((_BC[b] & (1 << a)));
       }
       // Dot Correction Data
