@@ -366,7 +366,7 @@ void TLC5955::setFunctionData(bool DSPRPT, bool TMGRST, bool RFRESH, bool ESPWM,
 // Assume all LEDs are the same
 void TLC5955::getGrayscale(uint16_t* grayscale)
 {
-  grayscale[0] = _grayscale_data[0][0][0];
+  grayscale[0] = this->_grayscale_data[0][0][0];
   grayscale[1] = _grayscale_data[0][0][1];
   grayscale[2] = _grayscale_data[0][0][2];
 }
