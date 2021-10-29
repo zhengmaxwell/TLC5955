@@ -142,6 +142,7 @@ private:
   uint8_t _MC[3];
   uint8_t _BC[3];
   uint8_t _DC[3];
+  uint16_t _GS[3]; // only used for analog tracking (non-functional)
   // uint16_t*** _grayscale_data = (uint16_t***)malloc(_tlc_count * sizeof(uint16_t**));
   // /for (int i = 0; i < LEDS_PER_CHIP; i++)
   // {
