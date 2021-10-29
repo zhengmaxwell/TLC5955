@@ -539,15 +539,14 @@ void TLC5955::updateControl()
       //   setBuffer((_DC[0] & (1 << a)));
 
       // // Dot Correction Data
-      for (int8_t a = LEDS_PER_CHIP - 1; a >= 0; a--)
-      {
+      // for (int8_t a = LEDS_PER_CHIP - 1; a >= 0; a--)
+      // {
         for (int8_t b = COLOR_CHANNEL_COUNT - 1; b >= 0; b--)
         {
-          for (int8_t c = 6; c >= 0; c--)
+          for (int8_t c = DC_BITS - 1; c >= 0; c--)
             setBuffer(_DC[b] & (1 << c));
-            // setBuffer(_dc_data[chip][a][b] & (1 << c));
         }
-      }
+      // }
 
       // if (debug >= 2)
     }
