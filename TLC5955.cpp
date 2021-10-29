@@ -374,11 +374,11 @@ void TLC5955::getGrayscale(uint8_t grayscale[])
 void TLC5955::setMaxCurrent(uint8_t mc)
 {
   // Ensure max Current agrees with datasheet (3-bit)
-  if (mcrgb > 7)
-    mcrgb = 7;
-  _MC[0] = mcrgb;
-  _MC[1] = mcrgb;
-  _MC[2] = mcrgb;
+  if (mc > 7)
+    mc = 7;
+  _MC[0] = mc;
+  _MC[1] = mc;
+  _MC[2] = mc;
 }
 
 void TLC5955::setMaxCurrent(uint8_t mcr, uint8_t mcg, uint8_t mcb)
