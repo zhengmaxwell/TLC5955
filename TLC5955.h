@@ -116,11 +116,11 @@ void printByte(uint8_t myByte);
 // uint8_t _rgb_order[TLC_COUNT][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
 // uint16_t _grayscale_data[TLC_COUNT][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
 
-extern static const uint8_t _tlc_count; // This
-extern static const uint8_t COLOR_CHANNEL_COUNT = 3;
-extern static const uint8_t LEDS_PER_CHIP = 16;
-extern static bool enforce_max_current;
-extern static float max_current_amps;
+const uint8_t _tlc_count; // This
+const uint8_t COLOR_CHANNEL_COUNT = 3;
+const uint8_t LEDS_PER_CHIP = 16;
+bool enforce_max_current;
+float max_current_amps;
 
 // extern static uint8_t _dc_data[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
 extern static uint8_t _rgb_order[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
