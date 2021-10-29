@@ -426,7 +426,7 @@ void TLC5955::getBrightnessCurrent(uint8_t brightnessCurrent[])
 {
   brightnessCurrent[0] = _BC[0];
   brightnessCurrent[1] = _BC[1];
-  brightnessCurrent[2] = _BC[2];
+  brightnessCurrent[2] = 12;//_BC[2];
 }
 
 // Sets all dot correction data to the same value (default should be 255
