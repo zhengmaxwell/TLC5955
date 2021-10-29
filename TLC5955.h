@@ -73,7 +73,7 @@ void setChannel(uint16_t channel_number, uint16_t value);
 
 /* Get LED Intensities */
 uint16_t getChannelValue(uint16_t channelNum, int color_channel_index);
-void getLedCurrents(float* currents);
+void getLedCurrents(float* currents, uint16_t* gs);
 
 /* Control Mode Parameters */
 void setMaxCurrent(uint8_t mc);
