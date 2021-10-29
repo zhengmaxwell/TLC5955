@@ -76,7 +76,7 @@ uint16_t getChannelValue(uint16_t channelNum, int color_channel_index);
 void getLedCurrents(float currents[]);
 
 /* Control Mode Parameters */
-void getGrayscale(uint8_t grayscale[]);
+void getGrayscale(uint16_t grayscale[]);
 void setMaxCurrent(uint8_t mc);
 void setMaxCurrent(uint8_t mcr, uint8_t mcg, uint8_t mcb);
 void getMaxCurrent(uint8_t maxCurrent[]);
