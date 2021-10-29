@@ -142,7 +142,7 @@ private:
   uint8_t _MC[3];
   uint8_t _BC[3];
   uint8_t _DC[3];
-  uint16_t _grayscale_data[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
+  uint16_t _grayscale_data[108][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
 
 
   /* SPI */
