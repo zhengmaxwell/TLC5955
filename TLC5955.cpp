@@ -368,7 +368,7 @@ void TLC5955::getGrayscale(uint8_t grayscale[])
 {
   grayscale[0] = _grayscale_data[0][0][0];
   grayscale[1] = _grayscale_data[0][0][1];
-  grayscale[2] = _grayscale_data[0][0][20];
+  grayscale[2] = _grayscale_data[0][0][2];
 }
 
 void TLC5955::setMaxCurrent(uint8_t mcrgb)
