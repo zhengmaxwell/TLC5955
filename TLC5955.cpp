@@ -366,9 +366,9 @@ void TLC5955::setFunctionData(bool DSPRPT, bool TMGRST, bool RFRESH, bool ESPWM,
 // Assume all LEDs are the same
 void TLC5955::getGrayscale(uint8_t grayscale[])
 {
-  grayscale[0] = _grayscale_data[1][1][0];
-  grayscale[1] = _grayscale_data[1][1][1];
-  grayscale[2] = _grayscale_data[1][1][2];
+  grayscale[0] = 11; //_grayscale_data[1][1][0];
+  grayscale[1] = 11; //_grayscale_data[1][1][1];
+  grayscale[2] = 11; //_grayscale_data[1][1][2];
 }
 
 void TLC5955::setMaxCurrent(uint8_t mcrgb)
