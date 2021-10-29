@@ -463,7 +463,7 @@ void TLC5955::getBrightnessCurrent(uint8_t brightnessCurrent[])
 //     Serial.println(F("ERROR (TLC5955::setLedDc) : Invalid color channel number"));
 // }
 
-void TLC5955:setDotCorrection(uint8_t dc)
+void TLC5955::setDotCorrection(uint8_t dc)
 {
   if (dc > 127)
     dc = 127;
