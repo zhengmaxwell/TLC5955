@@ -73,19 +73,19 @@ void setChannel(uint16_t channel_number, uint16_t value);
 
 /* Get LED Intensities */
 uint16_t getChannelValue(uint16_t channelNum, int color_channel_index);
-void getLedCurrents(float currents[]);
+void getLedCurrents(float* currents);
 
 /* Control Mode Parameters */
-void getGrayscale(uint16_t grayscale[]);
+void getGrayscale(uint16_t* grayscale);
 void setMaxCurrent(uint8_t mc);
 void setMaxCurrent(uint8_t mcr, uint8_t mcg, uint8_t mcb);
-void getMaxCurrent(uint8_t maxCurrent[]);
+void getMaxCurrent(uint8_t* maxCurrent);
 void setBrightnessControl(uint8_t bc);
 void setBrightnessControl(uint8_t bcr, uint8_t bcg, uint8_t bcb);
-void getBrightnessControl(uint8_t brightnessControl[]);
+void getBrightnessControl(uint8_t* brightnessControl);
 void setDotCorrection(uint8_t dc);
 void setDotCorrection(uint8_t dcr, uint8_t dcg, uint8_t dcb);
-void getDotCorrection(uint8_t dotCorrection[]);
+void getDotCorrection(uint8_t* dotCorrection);
 void setFunctionData(bool DSPRPT, bool TMGRST, bool RFRESH, bool ESPWM, bool LSDVLT);
 void setRgbPinOrder(uint8_t rPos, uint8_t grPos, uint8_t bPos);
 void setPinOrderSingle(uint16_t channel, uint8_t color_channel_index, uint8_t position);
@@ -124,7 +124,7 @@ static float max_current_amps;
 
 // static uint8_t _dc_data[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
 static uint8_t _rgb_order[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
-static uint16_t _grayscale_data[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
+// static uint16_t _grayscale_data[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
 
 uint8_t rgb_order_default[3] = {0, 1, 2};
 
@@ -142,6 +142,8 @@ private:
   uint8_t _MC[3];
   uint8_t _BC[3];
   uint8_t _DC[3];
+  uint16_t _grayscale_data[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
+
 
   /* SPI */
   uint8_t _buffer;
