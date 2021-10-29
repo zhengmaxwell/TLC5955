@@ -76,7 +76,6 @@ uint16_t getChannelValue(uint16_t channelNum, int color_channel_index);
 void getLedCurrents(float* currents);
 
 /* Control Mode Parameters */
-void getGrayscale(uint16_t* grayscale);
 void setMaxCurrent(uint8_t mc);
 void setMaxCurrent(uint8_t mcr, uint8_t mcg, uint8_t mcb);
 void getMaxCurrent(uint8_t* maxCurrent);
@@ -122,7 +121,6 @@ static const uint8_t LEDS_PER_CHIP = 16;
 static bool enforce_max_current;
 static float max_current_amps;
 
-// static uint8_t _dc_data[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
 static uint8_t _rgb_order[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
 static uint16_t _grayscale_data[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
 
@@ -142,16 +140,6 @@ private:
   uint8_t _MC[3];
   uint8_t _BC[3];
   uint8_t _DC[3];
-  uint16_t _GS[3]; // only used for analog tracking (non-functional)
-  // uint16_t*** _grayscale_data = (uint16_t***)malloc(_tlc_count * sizeof(uint16_t**));
-  // /for (int i = 0; i < LEDS_PER_CHIP; i++)
-  // {
-  //   _grayscale_data[i] = (uint16_t**)malloc(LEDS_PER_CHIP * sizeof(uint16_t*));
-  //   for (int j = 0; j < COLOR_CHANNEL_COUNT; j++)
-  //   {
-  //     _grayscale_data[i][j] = (uint16_t*)malloc(COLOR_CHANNEL_COUNT * sizeof(uint16_t));
-  //   }
-  // }
 
   /* SPI */
   uint8_t _buffer;
