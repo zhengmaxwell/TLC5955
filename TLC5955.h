@@ -80,7 +80,7 @@ void getGrayscale(uint8_t grayscale[]);
 void setBrightnessCurrent(uint8_t global);
 void setBrightnessCurrent(uint8_t red, uint8_t green, uint8_t blue);
 void getBrightnessCurrent(uint8_t brightnessCurrent[]);
-void setAllDcData(uint8_t dcvalue);
+void setAllDcData(uint8_t dcr, uint8_t dcg, uint8_t dcb);
 void setLedDc(uint16_t led_number, uint8_t color_channel_index, uint8_t dc_value);
 void getDc(uint8_t dotCorrection[]);
 void setMaxCurrent(uint8_t MCR, uint8_t MCG, uint8_t MCB);
@@ -139,14 +139,8 @@ private:
   uint8_t _gsclk;
 
   uint8_t _function_data;
-//   int16_t _bright_red;
-//   int16_t _bright_green;
-//   int16_t _bright_blue;
-//   int8_t _MCR;
-//   int8_t _MCG;
-//   int8_t _MCB;
-  uint8_t _BC[3];
   uint8_t _MC[3];
+  uint8_t _BC[3];
 
   /* SPI */
   uint8_t _buffer;

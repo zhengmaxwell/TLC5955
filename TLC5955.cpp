@@ -429,15 +429,15 @@ void TLC5955::getBrightnessCurrent(uint8_t brightnessCurrent[])
   brightnessCurrent[2] = _BC[2];
 }
 
-// Sets all dot correction data to the same value (default should be 255
-void TLC5955::setAllDcData(uint8_t dcvalue)
+void TLC5955::setAllDcData(uint8_t dcr, uint8_t dcg, uint8_t dcb)
 {
   for (int8_t chip = _tlc_count - 1; chip >= 0; chip--)
   {
     for (int8_t a = LEDS_PER_CHIP - 1; a >= 0; a--)
     {
-      for (int8_t b = COLOR_CHANNEL_COUNT - 1; b >= 0; b--)
-        _dc_data[chip][a][b] = dcvalue;
+      _dc_data[chip][a][0] = dcr;
+      _dc_data[chip][a][1] = dcg;
+      _dc_data[chip][a][2] = dcb;
     }
   }
 }
