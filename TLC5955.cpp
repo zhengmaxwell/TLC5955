@@ -346,9 +346,8 @@ void TLC5955::getLedCurrents(float currents[])
 {
   for (int i = 0; i < 3; i++)
   {
-    currents[i] = maxCurrentValues[_MC[i]] * (0.262 + 0.738 * _DC[i] / (2**DC_BITS - 1))
-              * (0.1 + 0.9 * _BC[i] / (2**BC_BITS - 1)));
-              //* _grayscale_data[0][0][i] / (2**GS_BITS - 1)
+    currents[i] = maxCurrentValues[_MC[i]] * (0.262 + 0.738 * _DC[i] / 127)
+              * (0.1 + 0.9 * _BC[i] / 127)); //* _grayscale_data[0][0][i] / 65535);
   }
 }
 
