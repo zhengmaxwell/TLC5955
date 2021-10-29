@@ -131,7 +131,7 @@ static uint16_t _grayscale_data[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
 uint8_t rgb_order_default[3] = {0, 1, 2};
 
   // Analog Control Values
-  const float maxCurrentValues[8] = {3.2, 8.0, 11.2, 15.9, 19.1, 23.9, 27.5, 31.9};
+const float maxCurrentValues[8] = {3.2, 8.0, 11.2, 15.9, 19.1, 23.9, 27.5, 31.9};
 
 private:
   int debug = 0;

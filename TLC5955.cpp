@@ -514,21 +514,16 @@ void TLC5955::updateControl()
       // 5-bit Function Data
       for (int8_t a = FC_BITS - 1; a >= 0; a--)
         setBuffer((_function_data & (1 << a)));
-      // Brightness Control Data
       for (int8_t b = COLOR_CHANNEL_COUNT -1; b >= 0; b--)
       {
-        for (int8_t a = GB_BITS - 1; a >= 0; a--)
-          setBuffer((_BC[b] & (1 << a)));
+        // Maximum Current Data
         for (int8_t a = MC_BITS - 1; a >= 0; a--)
           setBuffer((_MC[b] & (1 << a)));
+        // Brightness Control Data
+        for (int8_t a = GB_BITS - 1; a >= 0; a--)
+          setBuffer((_BC[b] & (1 << a)));
       }
-      // Maximum Current Data
-      // for (int8_t b = COLOR_CHANNEL_COUNT - 1; b >= 0; b--)
-      // {
-      //   for (int8_t a = MC_BITS - 1; a >= 0; a--)
-      //     setBuffer((_MC[b] & (1 << a)));
-      // }
-      // // Dot Correction Data
+      // Dot Correction Data
       for (int8_t a = LEDS_PER_CHIP - 1; a >= 0; a--)
       {
         for (int8_t b = COLOR_CHANNEL_COUNT - 1; b >= 0; b--)
