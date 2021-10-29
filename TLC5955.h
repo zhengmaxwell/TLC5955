@@ -142,15 +142,15 @@ private:
   uint8_t _MC[3];
   uint8_t _BC[3];
   uint8_t _DC[3];
-  uint16_t* _GS = (uint16_t*)malloc(_tlc_count * sizeof(uint16_t));
-  for (int i = 0; i < LEDS_PER_CHIP; i++)
-  {
-    _GS[i] = (uint16_t*)malloc(LEDS_PER_CHIP * sizeof(uint16_t));
-    for (int j = 0; j < COLOR_CHANNEL_COUNT; j++)
-    {
-      _GS[i][j] = (uint16_t*)_malloc(COLOR_CHANNEL_COUNT * sizeof(uint16_t));
-    }
-  }
+  uint16_t* _grayscale_data = (uint16_t*)malloc(_tlc_count * sizeof(uint16_t));
+  // for (int i = 0; i < LEDS_PER_CHIP; i++)
+  // {
+  //   _GS[i] = (uint16_t*)malloc(LEDS_PER_CHIP * sizeof(uint16_t));
+  //   for (int j = 0; j < COLOR_CHANNEL_COUNT; j++)
+  //   {
+  //     _GS[i][j] = (uint16_t*)_malloc(COLOR_CHANNEL_COUNT * sizeof(uint16_t));
+  //   }
+  // }
   // uint16_t* _grayscale_data = (uint16_t*)malloc(_tlc_count*LEDS_PER_CHIP*COLOR_CHANNEL_COUNT*sizeof(uint16_t));
 
 
