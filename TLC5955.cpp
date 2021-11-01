@@ -372,12 +372,12 @@ void TLC5955::setFunctionData(bool DSPRPT, bool TMGRST, bool RFRESH, bool ESPWM,
   _function_data = data;
 }
 
-void TLC5955::getGrayscale(uint16_t* grayscale)
-{
-  grayscale[0] = _GS[0];
-  grayscale[1] = _GS[1];
-  grayscale[2] = _GS[2];
-}
+// void TLC5955::getGrayscale(uint16_t* grayscale)
+// {
+//   grayscale[0] = _GS[0];
+//   grayscale[1] = _GS[1];
+//   grayscale[2] = _GS[2];
+// }
 
 void TLC5955::setMaxCurrent(uint8_t mc)
 {
