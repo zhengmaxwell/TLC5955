@@ -299,7 +299,7 @@ void TLC5955::setChannel(uint16_t channel_number, uint16_t value)
   // Set grayscale data
   _grayscale_data[chip_number][channel_number_new][color_channel_number] = value;
 
-  // _GS[color_channel_number] = value;
+  _GS[color_channel_number] = value;
 }
 
 void TLC5955::setLed(uint16_t led_number, uint16_t red, uint16_t green, uint16_t blue)
@@ -310,9 +310,9 @@ void TLC5955::setLed(uint16_t led_number, uint16_t red, uint16_t green, uint16_t
   _grayscale_data[chip][channel][1] = green;
   _grayscale_data[chip][channel][0] = red;
 
-  // _GS[2] = blue;
-  // _GS[1] = green;
-  // _GS[0] = red;
+  _GS[2] = blue;
+  _GS[1] = green;
+  _GS[0] = red;
 }
 
 void TLC5955::setLedAppend(uint16_t led_number, uint16_t red, uint16_t green, uint16_t blue)
@@ -344,9 +344,9 @@ void TLC5955::setLed(uint16_t led_number, uint16_t rgb)
   _grayscale_data[chip][channel][1] = rgb;
   _grayscale_data[chip][channel][0] = rgb;
 
-  // _GS[2] = rgb;
-  // _GS[1] = rgb;
-  // _GS[0] = rgb;
+  _GS[2] = rgb;
+  _GS[1] = rgb;
+  _GS[0] = rgb;
 }
 
 // Assume all LEDs are the same for Dot Correction and Grayscale
@@ -372,12 +372,12 @@ void TLC5955::setFunctionData(bool DSPRPT, bool TMGRST, bool RFRESH, bool ESPWM,
   _function_data = data;
 }
 
-// void TLC5955::getGrayscale(uint16_t* grayscale)
-// {
-//   grayscale[0] = _GS[0];
-//   grayscale[1] = _GS[1];
-//   grayscale[2] = _GS[2];
-// }
+void TLC5955::getGrayscale(uint16_t* grayscale)
+{
+  grayscale[0] = _GS[0];
+  grayscale[1] = _GS[1];
+  grayscale[2] = _GS[2];
+}
 
 void TLC5955::setMaxCurrent(uint8_t mc)
 {

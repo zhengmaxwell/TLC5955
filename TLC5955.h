@@ -76,7 +76,7 @@ uint16_t getChannelValue(uint16_t channelNum, int color_channel_index);
 void getLedCurrents(float* currents, uint16_t* gs);
 
 /* Control Mode Parameters */
-// void getGrayscale(uint16_t* grayscale);
+void getGrayscale(uint16_t* grayscale);
 void setMaxCurrent(uint8_t mc);
 void setMaxCurrent(uint8_t mcr, uint8_t mcg, uint8_t mcb);
 void getMaxCurrent(uint8_t* maxCurrent);
@@ -141,7 +141,7 @@ private:
   uint8_t _MC[3];
   uint8_t _BC[3];
   uint8_t _DC[3];
-  // uint16_t _GS[3]; // only used for analog calculations
+  uint16_t _GS[3]; // only used for analog calculations
 
   /* SPI */
   uint8_t _buffer;
