@@ -346,7 +346,7 @@ void TLC5955::setLed(uint16_t led_number, uint16_t rgb)
 
   _GS[2] = rgb;
   _GS[1] = rgb;
-  _GS]0] = rgb;
+  _GS[0] = rgb;
 }
 
 // Assume all LEDs are the same for Dot Correction and Grayscale
