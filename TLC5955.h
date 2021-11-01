@@ -76,7 +76,6 @@ uint16_t getChannelValue(uint16_t channelNum, int color_channel_index);
 void getLedCurrents(float* currents, uint16_t* gs);
 
 /* Control Mode Parameters */
-// void getGrayscale(uint16_t* grayscale);
 void setMaxCurrent(uint8_t mc);
 void setMaxCurrent(uint8_t mcr, uint8_t mcg, uint8_t mcb);
 void getMaxCurrent(uint8_t* maxCurrent);
@@ -108,14 +107,6 @@ uint32_t getGsclkFreq();
 /* Diagnostic Methods */
 void printByte(uint8_t myByte);
 
-// uint8_t _leds_per_chip = LEDS_PER_CHIP;
-// uint8_t _color_channel_count = COLOR_CHANNEL_COUNT;
-// uint8_t _tlc_count = TLC_COUNT;
-//
-// uint8_t _dc_data[TLC_COUNT][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
-// uint8_t _rgb_order[TLC_COUNT][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
-// uint16_t _grayscale_data[TLC_COUNT][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
-
 static const uint8_t _tlc_count; // This
 static const uint8_t COLOR_CHANNEL_COUNT = 3;
 static const uint8_t LEDS_PER_CHIP = 16;
@@ -141,7 +132,6 @@ private:
   uint8_t _MC[3];
   uint8_t _BC[3];
   uint8_t _DC[3];
-  // uint16_t _GS[3]; // only used for analog calculations
 
   /* SPI */
   uint8_t _buffer;
