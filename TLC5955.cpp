@@ -307,6 +307,7 @@ void TLC5955::setLed(uint16_t led_number, uint16_t red, uint16_t green, uint16_t
   _grayscale_data[chip][channel][2] = blue;
   _grayscale_data[chip][channel][1] = green;
   _grayscale_data[chip][channel][0] = red;
+
 }
 
 void TLC5955::setLedAppend(uint16_t led_number, uint16_t red, uint16_t green, uint16_t blue)
@@ -337,8 +338,10 @@ void TLC5955::setLed(uint16_t led_number, uint16_t rgb)
   _grayscale_data[chip][channel][2] = rgb;
   _grayscale_data[chip][channel][1] = rgb;
   _grayscale_data[chip][channel][0] = rgb;
+
 }
 
+// Assume all LEDs are the same for Dot Correction and Grayscale
 // Current per LED per channel in mA
 void TLC5955::getLedCurrents(float* currents, uint16_t* gs)
 {
@@ -484,6 +487,7 @@ void TLC5955::updateControl()
       for (int8_t a = BC_BITS - 1; a >= 0; a--)
         setBuffer((_BC[2] & (1 << a)));
       for (int8_t a = BC_BITS - 1; a >= 0; a--)
+        setBuffer((_BC[1] & (1 << a)));
       for (int8_t a = BC_BITS - 1; a >= 0; a--)
         setBuffer((_BC[0] & (1 << a)));
       // Maximum Current Data
