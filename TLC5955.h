@@ -119,7 +119,9 @@ static uint16_t _grayscale_data[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
 uint8_t rgb_order_default[3] = {0, 1, 2};
 
   // Analog Control Values
-const float maxCurrentValues[8] = {3.2, 8.0, 11.2, 15.9, 19.1, 23.9, 27.5, 31.9};
+  // https://www.ti.com/lit/ds/symlink/tlc5955.pdf?ts=1636036806528&ref_url=https%253A%252F%252Fwww.google.com%252F
+  // Page 8 (Table 8)
+const float maxCurrentValues_mA[8] = {3.2, 8.0, 11.2, 15.9, 19.1, 23.9, 27.5, 31.9};
 
 private:
   int debug = 0;

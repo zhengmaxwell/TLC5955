@@ -366,12 +366,7 @@ void TLC5955::setFunctionData(bool DSPRPT, bool TMGRST, bool RFRESH, bool ESPWM,
 
 void TLC5955::setMaxCurrent(uint8_t mc)
 {
-  // Ensure max Current agrees with datasheet (3-bit)
-  if (mc > 7)
-    mc = 7;
-  _MC[0] = mc;
-  _MC[1] = mc;
-  _MC[2] = mc;
+  setMaxCurrent(mc, mc, mc);
 }
 
 void TLC5955::setMaxCurrent(uint8_t mcr, uint8_t mcg, uint8_t mcb)
@@ -402,11 +397,7 @@ void TLC5955::getMaxCurrent(uint8_t* maxCurrent)
 // Set Brightness through CURRENT from 10-100% of value set in function mode
 void TLC5955::setBrightnessControl(uint8_t bc)
 {
-  if (bc > 127)
-    bc = 127;
-  _BC[0] = bc;
-  _BC[1] = bc;
-  _BC[2] = bc;
+  setBrightnessControl(bc, bc, bc);
 }
 
 // Set Brightness through CURRENT from 10-100% of value set in function mode
@@ -434,11 +425,7 @@ void TLC5955::getBrightnessControl(uint8_t* brightnessControl)
 
 void TLC5955::setDotCorrection(uint8_t dc)
 {
-  if (dc > 127)
-    dc = 127;
-  _DC[0] = dc;
-  _DC[1] = dc;
-  _DC[2] = dc;
+  setDotCorrection(dc, dc, dc);
 }
 
 void TLC5955::setDotCorrection(uint8_t dcr, uint8_t dcg, uint8_t dcb)
@@ -456,7 +443,6 @@ void TLC5955::setDotCorrection(uint8_t dcr, uint8_t dcg, uint8_t dcb)
   _DC[2] = dcb;
 }
 
-// Assumes all LEDs are the same
 void TLC5955::getDotCorrection(uint8_t* dotCorrection)
 {
   dotCorrection[0] = _DC[0];
