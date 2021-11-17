@@ -342,8 +342,8 @@ void TLC5955::setLed(uint16_t led_number, uint16_t rgb)
 }
 
 // Assume all LEDs are the same for Dot Correction and Grayscale
-// Current per LED per channel in mA
-void TLC5955::getLedCurrents(float* currents, uint16_t* gs)
+// Current per LED per channel in A
+void TLC5955::getLedCurrents(double* currents, uint16_t* gs)
 {
   for (int i = 0; i < 3; i++)
   {
