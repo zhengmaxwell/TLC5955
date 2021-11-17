@@ -131,6 +131,8 @@ private:
   uint8_t _gsclk;
 
   uint8_t _function_data;
+  // These are 3 long arrays, one for each color channel
+  // red, green and blue
   uint8_t _MC[3];
   uint8_t _BC[3];
   uint8_t _DC[3];
