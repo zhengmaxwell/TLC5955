@@ -273,13 +273,10 @@ void TLC5955::clearLeds()
   {
     setControlModeBit(CONTROL_MODE_OFF);
     SPI.beginTransaction(SPISettings(spi_baud_rate, MSBFIRST, SPI_MODE0));
-    uint8_t color_channel_ordered;
     for (int8_t led_channel_index = (int8_t)LEDS_PER_CHIP - 1; led_channel_index >= 0; led_channel_index--)
     {
       for (int8_t color_channel_index = (int8_t)COLOR_CHANNEL_COUNT - 1; color_channel_index >= 0; color_channel_index--)
       {
-        color_channel_ordered = _rgb_order[chip][led_channel_index][(uint8_t) color_channel_index];
-
         SPI.transfer((char) (uint16_t) 0); // Output MSB first
         SPI.transfer((char) (uint16_t) 0); // Followed by LSB
       }

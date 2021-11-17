@@ -2,3 +2,6 @@
 
 - Added functions to read and write analog controls.
 By: Maxwell Zheng -- Ramona Optics
+
+- Removed unused variable from the clearLEDs function
+By: Mark Harfouche -- Ramona Optics
