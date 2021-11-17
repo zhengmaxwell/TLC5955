@@ -38,10 +38,10 @@
 
 /* Bit Quantities (Change to match other TLC driver chips) */
 #define GS_BITS 16
-#define GB_BITS 7
 #define MC_BITS 3
-#define FC_BITS 5
+#define BC_BITS 7
 #define DC_BITS 7
+#define FC_BITS 5
 #define CONTROL_ZERO_BITS 389   /* Bits required for correct control reg size */
 #define TOTAL_REGISTER_SIZE 76
 #define LATCH_DELAY 1
@@ -73,14 +73,18 @@ void setChannel(uint16_t channel_number, uint16_t value);
 
 /* Get LED Intensities */
 uint16_t getChannelValue(uint16_t channelNum, int color_channel_index);
+void getLedCurrents(double* currents, uint16_t* gs);
 
 /* Control Mode Parameters */
-void setBrightnessCurrent(uint8_t global);
-void setBrightnessCurrent(uint8_t red, uint8_t green, uint8_t blue);
-void setAllDcData(uint8_t dcvalue);
-void setLedDc(uint16_t led_number, uint8_t color_channel_index, uint8_t dc_value);
-void setMaxCurrent(uint8_t MCR, uint8_t MCG, uint8_t MCB);
-void setMaxCurrent(uint8_t MCRGB);
+void setMaxCurrent(uint8_t mc);
+void setMaxCurrent(uint8_t mcr, uint8_t mcg, uint8_t mcb);
+void getMaxCurrent(uint8_t* maxCurrent);
+void setBrightnessControl(uint8_t bc);
+void setBrightnessControl(uint8_t bcr, uint8_t bcg, uint8_t bcb);
+void getBrightnessControl(uint8_t* brightnessControl);
+void setDotCorrection(uint8_t dc);
+void setDotCorrection(uint8_t dcr, uint8_t dcg, uint8_t dcb);
+void getDotCorrection(uint8_t* dotCorrection);
 void setFunctionData(bool DSPRPT, bool TMGRST, bool RFRESH, bool ESPWM, bool LSDVLT);
 void setRgbPinOrder(uint8_t rPos, uint8_t grPos, uint8_t bPos);
 void setPinOrderSingle(uint16_t channel, uint8_t color_channel_index, uint8_t position);
@@ -103,25 +107,21 @@ uint32_t getGsclkFreq();
 /* Diagnostic Methods */
 void printByte(uint8_t myByte);
 
-// uint8_t _leds_per_chip = LEDS_PER_CHIP;
-// uint8_t _color_channel_count = COLOR_CHANNEL_COUNT;
-// uint8_t _tlc_count = TLC_COUNT;
-//
-// uint8_t _dc_data[TLC_COUNT][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
-// uint8_t _rgb_order[TLC_COUNT][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
-// uint16_t _grayscale_data[TLC_COUNT][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
-
 static const uint8_t _tlc_count; // This
 static const uint8_t COLOR_CHANNEL_COUNT = 3;
 static const uint8_t LEDS_PER_CHIP = 16;
 static bool enforce_max_current;
 static float max_current_amps;
 
-static uint8_t _dc_data[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
 static uint8_t _rgb_order[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
 static uint16_t _grayscale_data[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
 
 uint8_t rgb_order_default[3] = {0, 1, 2};
+
+  // Analog Control Values
+  // https://www.ti.com/lit/ds/symlink/tlc5955.pdf?ts=1636036806528&ref_url=https%253A%252F%252Fwww.google.com%252F
+  // Page 8 (Table 8)
+const double maxCurrentValues[8] = {3.2e-3, 8.0e-3, 11.2e-3, 15.9e-3, 19.1e-3, 23.9e-3, 27.5e-3, 31.9e-3};
 
 private:
   int debug = 0;
@@ -131,12 +131,11 @@ private:
   uint8_t _gsclk;
 
   uint8_t _function_data;
-  uint16_t _bright_red;
-  uint16_t _bright_green;
-  uint16_t _bright_blue;
-  uint8_t _MCR;
-  uint8_t _MCG;
-  uint8_t _MCB;
+  // These are 3 long arrays, one for each color channel
+  // red, green and blue
+  uint8_t _MC[3];
+  uint8_t _BC[3];
+  uint8_t _DC[3];
 
   /* SPI */
   uint8_t _buffer;
