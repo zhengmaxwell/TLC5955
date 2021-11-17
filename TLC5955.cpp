@@ -33,6 +33,7 @@
 
 void TLC5955::init(uint8_t gslat, uint8_t spi_mosi, uint8_t spi_clk, uint8_t gsclk)
 {
+
   _gslat = gslat;
   _spi_clk = spi_clk;
   _spi_mosi = spi_mosi;
@@ -307,7 +308,6 @@ void TLC5955::setLed(uint16_t led_number, uint16_t red, uint16_t green, uint16_t
   _grayscale_data[chip][channel][2] = blue;
   _grayscale_data[chip][channel][1] = green;
   _grayscale_data[chip][channel][0] = red;
-
 }
 
 void TLC5955::setLedAppend(uint16_t led_number, uint16_t red, uint16_t green, uint16_t blue)
