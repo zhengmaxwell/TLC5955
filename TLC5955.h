@@ -104,9 +104,6 @@ uint32_t getSpiBaudRate();
 void setGsclkFreq(uint32_t new_gsclk_frequency);
 uint32_t getGsclkFreq();
 
-/* Diagnostic Methods */
-void printByte(uint8_t myByte);
-
 static const uint8_t _tlc_count; // This
 static const uint8_t COLOR_CHANNEL_COUNT = 3;
 static const uint8_t LEDS_PER_CHIP = 16;
