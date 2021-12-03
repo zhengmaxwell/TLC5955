@@ -76,6 +76,7 @@ uint16_t getChannelValue(uint16_t channelNum, int color_channel_index);
 void getLedCurrents(double* currents, uint16_t* gs);
 
 /* Control Mode Parameters */
+double getTotalCurrent();
 void setMaxCurrent(uint8_t mc);
 void setMaxCurrent(uint8_t mcr, uint8_t mcg, uint8_t mcb);
 void getMaxCurrent(uint8_t* maxCurrent);
@@ -115,13 +116,7 @@ static uint16_t _grayscale_data[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
 
 uint8_t rgb_order_default[3] = {0, 1, 2};
 
-  // Analog Control Values
-  // https://www.ti.com/lit/ds/symlink/tlc5955.pdf?ts=1636036806528&ref_url=https%253A%252F%252Fwww.google.com%252F
-  // Page 8 (Table 8)
-const double maxCurrentValues[8] = {3.2e-3, 8.0e-3, 11.2e-3, 15.9e-3, 19.1e-3, 23.9e-3, 27.5e-3, 31.9e-3};
-
 private:
-  int debug = 0;
   uint8_t _gslat;
   uint8_t _spi_mosi;
   uint8_t _spi_clk;
@@ -139,6 +134,12 @@ private:
   int8_t _buffer_count = 7;
   uint32_t spi_baud_rate = 1000000;
   uint32_t gsclk_frequency = 2500000;
+
+  // Analog Control Values
+  // https://www.ti.com/lit/ds/symlink/tlc5955.pdf?ts=1636036806528&ref_url=https%253A%252F%252Fwww.google.com%252F
+  // Page 8 (Table 8)
+  const double maxCurrentValues[8] = {
+    3.2e-3, 8.0e-3, 11.2e-3, 15.9e-3, 19.1e-3, 23.9e-3, 27.5e-3, 31.9e-3};
 
   SPISettings mSettings;
 };
