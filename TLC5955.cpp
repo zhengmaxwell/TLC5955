@@ -193,6 +193,7 @@ void TLC5955::setControlModeBit(bool is_control_mode)
 
 void TLC5955::updateLeds()
 {
+  getTotalCurrent()
   // Get number of counts for current pattern
   uint32_t power_output_counts = 0;
   for (int16_t chip = (int8_t)_tlc_count - 1; chip >= 0; chip--)
@@ -332,6 +333,22 @@ void TLC5955::setFunctionData(bool DSPRPT, bool TMGRST, bool RFRESH, bool ESPWM,
   data |= ESPWM << 3;
   data |= LSDVLT << 4;
   _function_data = data;
+}
+
+double TLC5955::getTotalCurrent()
+{
+  double totalCurrent = 0;
+  for (uint8_t color_channel_index = 0; color_channel_index < COLOR_CHANNEL_COUNT; color_channel_index++)
+  {
+    double current = maxCurrentValues[_MC[color_channel_index]]
+                    * (0.1 + 0.9 * _BC[color_channel_index] / 127)
+                    * (0.262 + 0.738 * _DC[color_channel_index] / 127);
+    for (uint8_t chip = 0; chip < _tlc_count; chip++)
+      for (uint8_t led_channel_index = 0; led_channel_index < LEDS_PER_CHIP; led_channel_index++)
+        totalCurrent += _grayscale_data[chip][led_channel_index][color_channel_index] * current;
+  }
+  Serial.printf("%f\n", totalCurrent); // TODO: remove after testing
+  return totalCurrent;
 }
 
 void TLC5955::setMaxCurrent(uint8_t mc)
