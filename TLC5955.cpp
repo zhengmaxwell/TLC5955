@@ -321,6 +321,8 @@ double TLC5955::getTotalCurrent()
   double totalCurrent = 0;
   for (uint8_t color_channel_index = 0; color_channel_index < COLOR_CHANNEL_COUNT; color_channel_index++)
   {
+    // https://www.ti.com/lit/ds/symlink/tlc5955.pdf?ts=1636036806528&ref_url=https%253A%252F%252Fwww.google.com%252F
+    // Page 17 (Equation 1)
     double current = maxCurrentValues[_MC[color_channel_index]]
                     * (0.1 + 0.9 * _BC[color_channel_index] / 127)
                     * (0.262 + 0.738 * _DC[color_channel_index] / 127);
