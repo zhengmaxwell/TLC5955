@@ -345,7 +345,7 @@ double TLC5955::getTotalCurrent()
                     * (0.262 + 0.738 * _DC[color_channel_index] / 127);
     for (uint8_t chip = 0; chip < _tlc_count; chip++)
       for (uint8_t led_channel_index = 0; led_channel_index < LEDS_PER_CHIP; led_channel_index++)
-        totalCurrent += _grayscale_data[chip][led_channel_index][color_channel_index] * current;
+        totalCurrent += _grayscale_data[chip][led_channel_index][color_channel_index] / 65535 * current;
   }
   Serial.printf("%f\n", totalCurrent); // TODO: remove after testing
   return totalCurrent;
