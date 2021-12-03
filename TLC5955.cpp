@@ -193,7 +193,7 @@ void TLC5955::setControlModeBit(bool is_control_mode)
 
 void TLC5955::updateLeds()
 {
-  getTotalCurrent()
+  getTotalCurrent();
   // Get number of counts for current pattern
   uint32_t power_output_counts = 0;
   for (int16_t chip = (int8_t)_tlc_count - 1; chip >= 0; chip--)
