@@ -340,9 +340,9 @@ double TLC5955::getTotalCurrent()
   double totalCurrent = 0;
   for (uint8_t color_channel_index = 0; color_channel_index < COLOR_CHANNEL_COUNT; color_channel_index++)
   {
-    double current = maxCurrentValues[_MC[color_channel_index]];
-    //                 * (0.1 + 0.9 * _BC[color_channel_index] / 127)
-    //                 * (0.262 + 0.738 * _DC[color_channel_index] / 127);
+    double current = maxCurrentValues[_MC[color_channel_index]]
+                    * (0.1 + 0.9 * _BC[color_channel_index] / 127)
+                    * (0.262 + 0.738 * _DC[color_channel_index] / 127);
     for (uint8_t chip = 0; chip < _tlc_count; chip++)
       for (uint8_t led_channel_index = 0; led_channel_index < LEDS_PER_CHIP; led_channel_index++)
         totalCurrent += current * _grayscale_data[chip][led_channel_index][color_channel_index] / 65535;
