@@ -89,7 +89,8 @@ void setRgbPinOrderSingle(uint16_t channel, uint8_t rPos, uint8_t grPos, uint8_t
 void setBuffer(uint8_t bit);
 void setControlModeBit(bool isControlMode);
 void flushBuffer();
-void updateLeds();
+// Returns 0 for success, other for failure
+int updateLeds();
 void clearLeds();
 void latch();
 void updateControl();

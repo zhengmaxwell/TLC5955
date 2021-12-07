@@ -191,13 +191,13 @@ void TLC5955::setControlModeBit(bool is_control_mode)
   SPI.begin();
 }
 
-void TLC5955::updateLeds()
+int TLC5955::updateLeds()
 {
   if (enforce_max_current)
   {
     double power_output_amps = getTotalCurrent();
     if (power_output_amps > max_current_amps)
-      return;
+      return 1;
   }
 
   // uint32_t power_output_counts = 0;
@@ -220,6 +220,7 @@ void TLC5955::updateLeds()
   }
 
   latch();
+  return 0;
 }
 
 void TLC5955::clearLeds()
