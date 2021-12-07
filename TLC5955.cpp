@@ -193,6 +193,18 @@ void TLC5955::setControlModeBit(bool is_control_mode)
 
 int TLC5955::updateLeds()
 {
+  // Get number of counts for current pattern
+  uint32_t power_output_counts = 0;
+  for (int16_t chip = (int8_t)_tlc_count - 1; chip >= 0; chip--)
+    for (int8_t led_channel_index = (int8_t)LEDS_PER_CHIP - 1; led_channel_index >= 0; led_channel_index--)
+      for (int8_t color_channel_index = (int8_t)COLOR_CHANNEL_COUNT - 1; color_channel_index >= 0; color_channel_index--)
+        power_output_counts += _grayscale_data[chip][led_channel_index][color_channel_index];
+  if (power_output_counts == 0) {
+    analogWrite(_gsclk, 0);
+  } else {
+    analogWrite(_gsclk, 1);
+  }
+
   if (enforce_max_current)
   {
     double power_output_amps = getTotalCurrent();
@@ -200,7 +212,6 @@ int TLC5955::updateLeds()
       return 1;
   }
 
-  // uint32_t power_output_counts = 0;
   for (int16_t chip = (int8_t)_tlc_count - 1; chip >= 0; chip--)
   {
     setControlModeBit(CONTROL_MODE_OFF);
