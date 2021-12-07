@@ -191,13 +191,19 @@ void TLC5955::setControlModeBit(bool is_control_mode)
   SPI.begin();
 }
 
-int TLC5955::updateLeds()
+int TLC5955::updateLeds(double* output_current)
 {
+
   double power_output_amps = getTotalCurrent();
+  if (output_current != nullptr)
+  {
+    *output_current = power_output_amps;
+  }
   if (enforce_max_current && power_output_amps > max_current_amps)
     return 1;
 
-  if (power_output_amps == 0) {
+  // 0. comparity check is OK since we know all currents are positive
+  if (power_output_amps == 0.) {
     analogWrite(_gsclk, 0);
   } else {
     analogWrite(_gsclk, 1);

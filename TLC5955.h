@@ -90,7 +90,7 @@ void setBuffer(uint8_t bit);
 void setControlModeBit(bool isControlMode);
 void flushBuffer();
 // Returns 0 for success, other for failure
-int updateLeds();
+int updateLeds(double* output_current);
 void clearLeds();
 void latch();
 void updateControl();
@@ -104,7 +104,7 @@ static const uint8_t _tlc_count; // This
 static const uint8_t COLOR_CHANNEL_COUNT = 3;
 static const uint8_t LEDS_PER_CHIP = 16;
 static bool enforce_max_current;
-static float max_current_amps;
+static double max_current_amps;
 
 static uint8_t _rgb_order[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
 static uint16_t _grayscale_data[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
