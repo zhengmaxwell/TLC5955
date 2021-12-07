@@ -99,8 +99,7 @@ void TLC5955::setRgbPinOrder(uint8_t rPos, uint8_t grPos, uint8_t bPos)
         _rgb_order[chip][channel][2] = bPos;
       }
     }
-  } else
-    Serial.println(F("ERROR (TLC5955::setRgbPinOrder): Color channel count is not 3"));
+  }
 }
 
 void TLC5955::setPinOrderSingle(uint16_t led_number, uint8_t color_channel_index, uint8_t position)
@@ -144,8 +143,7 @@ void TLC5955::setAllLedRgb(uint16_t red, uint16_t green, uint16_t blue)
         _grayscale_data[chip][channel][0] = red;
       }
     }
-  } else
-    Serial.println(F("ERROR (TLC5955::setAllLedRgb): Color channel count is not 3"));
+  }
 }
 
 void TLC5955::flushBuffer()
