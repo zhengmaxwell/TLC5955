@@ -49,9 +49,6 @@
 #define CONTROL_MODE_ON 1
 #define CONTROL_MODE_OFF 0
 
-// Line ending for serial output
-static const char LINE_ENDING[] = "\n";
-
 class TLC5955
 {
 public:
