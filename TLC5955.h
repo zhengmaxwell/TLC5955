@@ -49,12 +49,6 @@
 #define CONTROL_MODE_ON 1
 #define CONTROL_MODE_OFF 0
 
-// LED Current OUTPUT
-static const float LED_CURRENT_AMPS = 0.020;
-
-// Line ending for serial output
-static const char LINE_ENDING[] = "\n";
-
 class TLC5955
 {
 public:
@@ -76,6 +70,7 @@ uint16_t getChannelValue(uint16_t channelNum, int color_channel_index);
 void getLedCurrents(double* currents, uint16_t* gs);
 
 /* Control Mode Parameters */
+double getTotalCurrent();
 void setMaxCurrent(uint8_t mc);
 void setMaxCurrent(uint8_t mcr, uint8_t mcg, uint8_t mcb);
 void getMaxCurrent(uint8_t* maxCurrent);
@@ -94,7 +89,8 @@ void setRgbPinOrderSingle(uint16_t channel, uint8_t rPos, uint8_t grPos, uint8_t
 void setBuffer(uint8_t bit);
 void setControlModeBit(bool isControlMode);
 void flushBuffer();
-void updateLeds();
+// Returns 0 for success, other for failure
+int updateLeds(double* output_current);
 void clearLeds();
 void latch();
 void updateControl();
@@ -108,20 +104,14 @@ static const uint8_t _tlc_count; // This
 static const uint8_t COLOR_CHANNEL_COUNT = 3;
 static const uint8_t LEDS_PER_CHIP = 16;
 static bool enforce_max_current;
-static float max_current_amps;
+static double max_current_amps;
 
 static uint8_t _rgb_order[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
 static uint16_t _grayscale_data[][LEDS_PER_CHIP][COLOR_CHANNEL_COUNT];
 
 uint8_t rgb_order_default[3] = {0, 1, 2};
 
-  // Analog Control Values
-  // https://www.ti.com/lit/ds/symlink/tlc5955.pdf?ts=1636036806528&ref_url=https%253A%252F%252Fwww.google.com%252F
-  // Page 8 (Table 8)
-const double maxCurrentValues[8] = {3.2e-3, 8.0e-3, 11.2e-3, 15.9e-3, 19.1e-3, 23.9e-3, 27.5e-3, 31.9e-3};
-
 private:
-  int debug = 0;
   uint8_t _gslat;
   uint8_t _spi_mosi;
   uint8_t _spi_clk;
@@ -139,6 +129,12 @@ private:
   int8_t _buffer_count = 7;
   uint32_t spi_baud_rate = 1000000;
   uint32_t gsclk_frequency = 2500000;
+
+  // Analog Control Values
+  // https://www.ti.com/lit/ds/symlink/tlc5955.pdf?ts=1636036806528&ref_url=https%253A%252F%252Fwww.google.com%252F
+  // Page 8 (Table 8)
+  const double maxCurrentValues[8] = {
+    3.2e-3, 8.0e-3, 11.2e-3, 15.9e-3, 19.1e-3, 23.9e-3, 27.5e-3, 31.9e-3};
 
   SPISettings mSettings;
 };
